@@ -27,7 +27,7 @@ public class BoardListAction implements CommandProcess {
 
 		BoardDAO boardDAO = BoardDAO.getInstance();
 
-		//1ÆäÀÌÁö´ç 5°³¾¿
+		//1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 5ï¿½ï¿½ï¿½ï¿½
 		int endNum = pg * 5;
 		int startNum = endNum - 4;
 		
@@ -50,7 +50,8 @@ public class BoardListAction implements CommandProcess {
 		request.setAttribute("boardPaging", boardPaging);
 		request.setAttribute("pg", pg);
 		
-		return "/board/boardList.jsp";
+		request.setAttribute("display", "/board/boardList.jsp");
+		return "/main/index.jsp";
 	}
 
 }

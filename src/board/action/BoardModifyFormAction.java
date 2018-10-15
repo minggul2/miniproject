@@ -21,8 +21,9 @@ public class BoardModifyFormAction implements CommandProcess {
 		
 		String id = (String)request.getSession().getAttribute("memId");
 		
+		request.setAttribute("display", "/board/boardModifyForm.jsp?pg="+pg+"&seq="+seq);
 		
-		return "/board/boardModifyForm.jsp?pg="+pg+"&seq="+seq;
+		return "/main/index.jsp";
 	}
 
 }

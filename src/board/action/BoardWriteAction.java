@@ -35,8 +35,9 @@ public class BoardWriteAction implements CommandProcess {
 		BoardDAO boardDAO = BoardDAO.getInstance();
 		int su = boardDAO.writeBoard(map);
 		
+		request.setAttribute("display", "/board/boardWrite.jsp");
 		
-		return "/board/boardWrite.jsp";
+		return "/main/index.jsp";
 	}
 	
 }

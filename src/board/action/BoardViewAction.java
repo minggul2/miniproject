@@ -21,7 +21,7 @@ public class BoardViewAction implements CommandProcess {
 		if(session.getAttribute("memId") != null) {
 			id = (String)session.getAttribute("memId");
 		}
-		System.out.println("±Ûº¸±â ¾ÆÀÌµð´Â : "  + id);
+		System.out.println("ï¿½Ûºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ï¿½ : "  + id);
 		
 		
 
@@ -29,22 +29,22 @@ public class BoardViewAction implements CommandProcess {
 		int pg = Integer.parseInt(request.getParameter("pg"));
 		BoardDAO boardDAO = BoardDAO.getInstance();
 		
-		Cookie[] ar = request.getCookies();		//ÄíÅ°¹Þ¾Æ¿È
-		Cookie cookie = null;							//ÄíÅ°ÂüÁ¶º¯¼ö ¸¸µë
+		Cookie[] ar = request.getCookies();		//ï¿½ï¿½Å°ï¿½Þ¾Æ¿ï¿½
+		Cookie cookie = null;							//ï¿½ï¿½Å°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		
-		if(ar != null){							//¹Þ¾Æ¿Â ÄíÅ°°¡ ÀÖ´Ù¸é (ÀÌ¹Ì ´©¸¥ °Ô½Ã±ÛÀ» ´Ù½Ã ´­·¶À»°æ¿ì)
-			for(int i = 0; i < ar.length; i++){		//¹Þ¾Æ¿Â ÄíÅ°¹è¿­ for¹®
-				//if(cookies[i].getValue().equals(seq+"") && cookies[i].getComment().equals(id)){	//ÇÏ³ªÇÏ³ª ºñ±³ÇÏ´Ù°¡ ÄíÅ°ÀÌ¸§ÀÌ ±Û¹øÈ£seq ÀÏ°æ¿ì
+		if(ar != null){							//ï¿½Þ¾Æ¿ï¿½ ï¿½ï¿½Å°ï¿½ï¿½ ï¿½Ö´Ù¸ï¿½ (ï¿½Ì¹ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½Ã±ï¿½ï¿½ï¿½ ï¿½Ù½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
+			for(int i = 0; i < ar.length; i++){		//ï¿½Þ¾Æ¿ï¿½ ï¿½ï¿½Å°ï¿½è¿­ forï¿½ï¿½
+				//if(cookies[i].getValue().equals(seq+"") && cookies[i].getComment().equals(id)){	//ï¿½Ï³ï¿½ï¿½Ï³ï¿½ ï¿½ï¿½ï¿½Ï´Ù°ï¿½ ï¿½ï¿½Å°ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½Û¹ï¿½È£seq ï¿½Ï°ï¿½ï¿½
 				//}
 				if(ar[i].getName().equals(id+seq+"")){
-					cookie = ar[i];					//ÄíÅ° »ý¼º ¹æÁö
+					cookie = ar[i];					//ï¿½ï¿½Å° ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 					System.out.println(cookie.getName());
 					break;
 				}
 			}
 		}
 		
-		if(cookie == null){								//¹Þ´Ù¿Â ÄíÅ°°¡ ¾ø´Ù¸é (Ã³À½ Á¶È¸ÇÒ °æ¿ì)
+		if(cookie == null){								//ï¿½Þ´Ù¿ï¿½ ï¿½ï¿½Å°ï¿½ï¿½ ï¿½ï¿½ï¿½Ù¸ï¿½ (Ã³ï¿½ï¿½ ï¿½ï¿½È¸ï¿½ï¿½ ï¿½ï¿½ï¿½)
 			//cookie = new Cookie("hit", seq+"");			//
 			cookie = new Cookie(id+seq+"", id);
 			cookie.setMaxAge(60*60);
@@ -57,7 +57,9 @@ public class BoardViewAction implements CommandProcess {
 		request.setAttribute("boardDTO", boardDTO);
 		request.setAttribute("pg", pg);
 		
-		return "/board/boardView.jsp";
+		request.setAttribute("display", "/board/boardView.jsp");
+		
+		return "/main/index.jsp";
 	}
 
 }

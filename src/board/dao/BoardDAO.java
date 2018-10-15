@@ -48,7 +48,7 @@ public static BoardDAO instance;
 	public int writeBoard(Map<String, String> map) {
 		int su = 0;
 		
-		//¿ø±Û ref = seq
+		//ï¿½ï¿½ï¿½ï¿½ ref = seq
 		String sql = "insert into board(seq, id, name, email, subject, content, ref) values(seq_board.nextval,?,?,?,?,?,seq_board.currval)";
 		try {
 			conn = ds.getConnection();
@@ -228,6 +228,36 @@ public static BoardDAO instance;
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	//ë‹µê¸€
+	public int writeReply(Map<String, String> map) {
+		int su = 0;
+		
+		//ï¿½ï¿½ï¿½ï¿½ ref = seq
+		String sql = "insert into board(seq, id, name, email, subject, content, ref) values(seq_board.nextval,?,?,?,?,?,seq_board.currval)";
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, map.get("id"));
+			pstmt.setString(2, map.get("name"));
+			pstmt.setString(3, map.get("email"));
+			pstmt.setString(4, map.get("subject"));
+			pstmt.setString(5, map.get("content"));
+			su = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		} finally {
+			try {
+				if(pstmt != null)pstmt.close();
+				if(conn != null) conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return su;
 	}
 	
 }
