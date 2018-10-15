@@ -1,0 +1,57 @@
+@charset "UTF-8";
+
+body{
+	border : 1px solid black;
+	font-size: 13px;}
+	div.all_div { 
+	overflow: hidden;
+	
+	width : 100%;
+	height : 100%;
+	margin: 0 auto;
+}
+div.table_div {
+	overflow: hidden;
+	display: block; 
+}
+div.table_div table {
+	 width: 500px;
+	 margin: 10px auto;
+	 border: 1px solid black;
+}
+div.table_div table td {
+	height: 30px;
+	border: 1px solid black;
+}	
+div.table_div table td input {
+	/*margin: 0 0 0 10px;*/
+}
+div.table_div table td.table_th {
+	width: 60px;
+	text-align: center;
+	background-color: #dddddd;
+}
+
+div.table_div table td.button_td {
+	height: 40px;
+	text-align: center;
+}
+input:focus {
+  outline: none;
+}
+input {
+vertical-align: top;
+}
+select {
+	height: 24px;
+}
+input[type=text],input[type=password] {
+	height: 20px;
+	padding: 0px;
+}
+.mb5 {margin-bottom: 5px;}
+.w10 {width: 10%;}
+.w20 {width: 20%;}
+.w30 {width: 30%;}
+.w50 {width: 50%;}
+.w100 {width: 99.8%;}
