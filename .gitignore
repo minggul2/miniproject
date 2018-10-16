@@ -1,2 +1,5 @@
 /build/
 .settings
+/.settings
+/.settings/
+/settings/
