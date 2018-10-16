@@ -24,8 +24,8 @@
 		</td>		
 	</tr>
 	
-	<tr>
-		<td colspan="4" align="center">
+		<tr>
+			<td colspan="4" align="center">
 			<jsp:include page="../template/bottom.jsp"></jsp:include>
 		</td>
 	</tr>	

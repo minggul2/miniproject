@@ -1,5 +1,7 @@
 package member.dao;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -12,6 +14,9 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import org.json.JSONObject;
+
+import jdk.nashorn.internal.parser.JSONParser;
 import memberjsp.bean.MemberDTO;
 import memberjsp.bean.ZipcodeDTO;
 
@@ -124,6 +129,53 @@ public static MemberDAO instance;
 		return list;
 	}
 	
+	//json ¸â¹ö¹Þ±â
+	
+	public JSONObject getMemberJson(String id) {
+		String sql = "select * from member where id = ?";
+		JSONObject json = null; 
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				
+				json = new JSONObject();
+				json.put("name", rs.getString("name"));
+				json.put("id", rs.getString("id"));
+				json.put("gender", rs.getString("gender"));
+				json.put("email1", rs.getString("email1"));
+				json.put("email2", rs.getString("email2"));
+				json.put("tel1", rs.getString("tel1"));
+				json.put("tel2", rs.getString("tel2"));
+				json.put("tel3", rs.getString("tel3"));
+				json.put("zipcode", rs.getString("zipcode"));
+				json.put("addr1", rs.getString("addr1"));
+				json.put("addr2", rs.getString("addr2"));
+				
+				 
+				
+			}
+			
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			json = null;
+		}finally {
+			try {
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return json;
+	}
+	
 	public MemberDTO getMember(String id) {
 		MemberDTO memberDTO = new MemberDTO();
 		String sql = "select * from member where id = ?";
@@ -133,6 +185,9 @@ public static MemberDAO instance;
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
+				 
+				
+				
 				memberDTO.setName(rs.getString("name"));
 				memberDTO.setId(rs.getString("id"));
 				memberDTO.setGender(rs.getString("gender"));
@@ -144,6 +199,8 @@ public static MemberDAO instance;
 				memberDTO.setZipcode(rs.getString("zipcode"));
 				memberDTO.setAddr1(rs.getString("addr1"));
 				memberDTO.setAddr2(rs.getString("addr2"));
+				
+				
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

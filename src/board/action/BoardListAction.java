@@ -16,15 +16,17 @@ public class BoardListAction implements CommandProcess {
 
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-		int pg;
+		/*int pg;
 		
 		if(request.getParameter("pg") != null) {
 			pg = Integer.parseInt(request.getParameter("pg"));
 		}else {
 			pg = 1;
-		}
+		}*/
 		
-
+		int pg = request.getParameter("pg") != null ? Integer.parseInt(request.getParameter("pg")) : 1; 
+		
+		
 		BoardDAO boardDAO = BoardDAO.getInstance();
 
 		//1�������� 5����

@@ -42,13 +42,12 @@
 </div>
 
 <div align = "center">
-<img style = "float : center; cursor: pointer;" src = "../image/aa.png" onclick = "location.href = '../main/index.jsp'">
+<!-- <img style = "float : center; cursor: pointer;" src = "../image/aa.png" onclick = "location.href = '../main/index.jsp'"> -->
 <div style = "float : center; border : 1px red solid; width : 600px; text-align : center;" align = "center">${boardPaging.pagingHTML}</div>
 </div>
 <script src = "http://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src ="../js/board.js">
 	
 </script>
-
 </body>
 </html>

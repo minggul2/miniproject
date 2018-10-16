@@ -1,6 +1,5 @@
 $(document).ready(function(){
 	$('#board_write_button').on('click', function(){
-		alert("");
 		
 		$('#content_div').empty();
 		$('#subject_div').empty();
@@ -20,11 +19,13 @@ $(document).ready(function(){
 		location.href = 'boardView.do?seq='+seq+'&pg='+pg;
 	});
 	
-	
 	$('#view_div').on('click', '#board_modify_button', function(){
+		
 		var seq = $('#seq').val();
 		var pg = $('#pg').val();
 		
 		location.href = 'boardModifyForm.do?seq='+seq+'&pg='+pg;
 	});
+	
+	
 });

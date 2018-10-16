@@ -31,7 +31,7 @@
 	
 	<div align = "center" id = "view_div">	
 	<input type = "button" value = "목록" onclick = "location.href = 'boardList.do?pg=${pg}'">
-	<input type = "button" value = "답글" onclick = "location.href = 'replyWriteForm.do?seq=${boardDTO.seq}'">
+	<input type = "button" value = "답글" onclick = "location.href = 'boardReplyForm.do?pseq=${boardDTO.seq}&pg=${pg}'">
 	<c:if test="${memId == boardDTO.id}">
 		<input type = "button" value = "글수정" id = "board_modify_button">
 		<input type = "button" value = "글삭제">

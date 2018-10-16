@@ -20,7 +20,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form name = "boardWriteForm" method = "post" action = "boardWrite.do" id = "board_write_form">
+	<form name = "boardWriteForm" method = "post" action = "boardReply.do" id = "board_write_form">
+	<input type = "hidden" value = "${pg}"  name = "pg"/>
+	<input type = "hidden" value = "${pseq}" name = "seq"/>
 	<table border = "1">
 		<tr>
 			<td class = "shows">제목</td>
@@ -37,10 +39,11 @@
 		</tr>
 		<tr>
 			<td colspan = "2" align = "center" >
-				<input type = "button" value = "글작성" id = "board_write_button">
+				<input type = "button" value = "답글작성" id = "board_write_button">
 				<input type = "reset" value = "취소">				
 			</td>
 		</tr>
+		
 	</table>
 	</form>
 	<script src = "http://code.jquery.com/jquery-3.3.1.min.js"></script>

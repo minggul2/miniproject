@@ -20,7 +20,8 @@ public class BoardWriteAction implements CommandProcess {
 		
 		String id = (String)session.getAttribute("memId");
 		String name = (String)session.getAttribute("memName");
-		String email = (String)session.getAttribute("memEamil");
+		String email = (String)session.getAttribute("memEmail");
+		System.out.println(email);
 		
 		String subject = request.getParameter("subject");
 		String content = request.getParameter("content");

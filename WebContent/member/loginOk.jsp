@@ -11,6 +11,7 @@
 	${sessionScope.memName} 님 로그인
 	<br><br>
 	<input type="button" value="로그아웃" onclick = "location.href = '/miniproject/member/logout.do'">
-	<input type="button" value="회원정보수정" onclick = "location.href='/miniproject/member/modifyForm.do'">
+	<input type="button" value="회원정보수정" id = "modify_btn">
+	<!--onclick = "location.href='/miniproject/member/modifyForm.do'"-->
 </body>
 </html>

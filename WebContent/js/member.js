@@ -5,6 +5,8 @@ $(document).ready(function(){
 	var newWindow = null;
 	var post_window;
 	
+	
+	
 	//회원가입 이벤트
 	$('form[name=writeForm]').on('click', '#write_button', function(){
 		var name = $('#name').val();
@@ -154,6 +156,23 @@ $(document).ready(function(){
 		$('#addr1', opener.document).val(addr);
 		$('#addr2', opener.document).focus();
 		window.close();
+		
+	});
+	
+	//회원정보수정
+	$('#modify_btn').on('click', function(){
+		location.href = "/miniproject/member/modifyForm.do";
+		$.ajax({
+			type : "POST",
+			url : "../json/modify.json",
+			data : {},
+			dataType : "json",
+			success : function(data){
+				alert(data.email1);	
+				alert(data.name);
+				alert(data.tel1);
+			}
+		});
 		
 	});
 });
