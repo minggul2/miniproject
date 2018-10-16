@@ -171,6 +171,7 @@ $(document).ready(function(){
 				alert(data.email1);	
 				alert(data.name);
 				alert(data.tel1);
+				
 			}
 		});
 		
