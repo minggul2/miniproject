@@ -230,34 +230,76 @@ public static BoardDAO instance;
 		}
 	}
 	
-	//답글
-	public int writeReply(Map<String, String> map) {
-		int su = 0;
+	//답글 
+	public void boardReply(Map<String, String> map) {
 		
-		//���� ref = seq
-		String sql = "insert into board(seq, id, name, email, subject, content, ref) values(seq_board.nextval,?,?,?,?,?,seq_board.currval)";
+		String sql  = "select lev, step, ref, seq from board where seq = ?";
+		int one_lev = 0;
+		int one_step = 0;
+		int one_ref = 0;
+		
 		try {
 			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, Integer.parseInt(map.get("pseq")));
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				one_lev = rs.getInt("lev");
+				one_step = rs.getInt("step");
+				one_ref = rs.getInt("ref");
+			}
+			//원글 정보 가져왔음
+			
+			sql = "update board set step = step +1 where lev = ? and step > ?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, one_lev);
+			pstmt.setInt(2, 0);
+			pstmt.executeUpdate();
+			
+			sql = "insert into board values(seq_board.nextval, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0, 0, sysdate)";
+			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, map.get("id"));
 			pstmt.setString(2, map.get("name"));
 			pstmt.setString(3, map.get("email"));
 			pstmt.setString(4, map.get("subject"));
 			pstmt.setString(5, map.get("content"));
-			su = pstmt.executeUpdate();
+			pstmt.setInt(6, one_ref);
+			pstmt.setInt(7, 1);
+			pstmt.setInt(8, one_step+1);
+			pstmt.setInt(9, Integer.parseInt(map.get("pseq")));
+			pstmt.executeUpdate();
+			
+			
+			
+			sql = "update board set reply = reply + 1 where seq = ?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, Integer.parseInt(map.get("pseq")));
+			pstmt.executeUpdate();
+			
+			
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
-			
-		} finally {
+		}finally {
 			try {
-				if(pstmt != null)pstmt.close();
-				if(conn != null) conn.close();
+				if(rs!=null)rs.close();
+				if(pstmt!=null)pstmt.close();
+				if(conn!=null)conn.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
+				
+		//원글의 lev가 0일경우
 		
-		return su;
+		
+		
+		//원글의 lev가 0이 아닐경우 
+		
+		
 	}
 	
 }

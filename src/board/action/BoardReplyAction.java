@@ -23,6 +23,7 @@ public class BoardReplyAction implements CommandProcess {
 		String email = (String)request.getSession().getAttribute("memEmail");
 		String name = (String)request.getSession().getAttribute("memName");
 		
+		System.out.println(pseq);
 		
 		System.out.println(pseq + " + " + pg + " + " + subject + " + " + content + " + " + id);
 		
