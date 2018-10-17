@@ -16,6 +16,7 @@ public class BoardReplyFormAction implements CommandProcess{
 		request.setAttribute("display", "/board/boardReplyForm.jsp");
 		request.setAttribute("pg", Integer.parseInt(request.getParameter("pg")));
 		request.setAttribute("pseq", Integer.parseInt(request.getParameter("pseq")));
+		System.out.println(pseq);
 		
 		return "/main/index.jsp";
 	}
