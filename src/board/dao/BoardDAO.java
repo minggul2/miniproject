@@ -48,7 +48,7 @@ public static BoardDAO instance;
 	public int writeBoard(Map<String, String> map) {
 		int su = 0;
 		
-		//���� ref = seq
+		//占쏙옙占쏙옙 ref = seq
 		String sql = "insert into board(seq, id, name, email, subject, content, ref) values(seq_board.nextval,?,?,?,?,?,seq_board.currval)";
 		try {
 			conn = ds.getConnection();
@@ -230,7 +230,7 @@ public static BoardDAO instance;
 		}
 	}
 	
-	//답글 
+	//�떟湲� 
 	public void boardReply(Map<String, String> map) {
 		
 		String sql  = "select lev, step, ref, seq from board where seq = ?";
@@ -248,13 +248,16 @@ public static BoardDAO instance;
 				one_step = rs.getInt("step");
 				one_ref = rs.getInt("ref");
 			}
-			//원글 정보 가져왔음
+			//�썝湲� �젙蹂� 媛��졇�솕�쓬
+			//lev은 구별없이 step 에서 마무리해야함
 			
-			sql = "update board set step = step +1 where lev = ? and step > ?";
+			sql = "update board set step = step +1 where ref = ? and step > ?";
+			//pseq의 step 보다 큰것들 전부 올림
 			
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, one_lev);
-			pstmt.setInt(2, 0);
+			pstmt.setInt(1, one_ref);
+			//step 을 조상에서 올릴지??
+			pstmt.setInt(2, one_step);
 			pstmt.executeUpdate();
 			
 			sql = "insert into board values(seq_board.nextval, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0, 0, sysdate)";
@@ -266,12 +269,10 @@ public static BoardDAO instance;
 			pstmt.setString(4, map.get("subject"));
 			pstmt.setString(5, map.get("content"));
 			pstmt.setInt(6, one_ref);
-			pstmt.setInt(7, 1);
+			pstmt.setInt(7, one_lev+1);
 			pstmt.setInt(8, one_step+1);
 			pstmt.setInt(9, Integer.parseInt(map.get("pseq")));
 			pstmt.executeUpdate();
-			
-			
 			
 			sql = "update board set reply = reply + 1 where seq = ?";
 			
@@ -293,11 +294,11 @@ public static BoardDAO instance;
 			}
 		}
 				
-		//원글의 lev가 0일경우
+		//�썝湲��쓽 lev媛� 0�씪寃쎌슦
 		
 		
 		
-		//원글의 lev가 0이 아닐경우 
+		//�썝湲��쓽 lev媛� 0�씠 �븘�땺寃쎌슦 
 		
 		
 	}

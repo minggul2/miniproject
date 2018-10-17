@@ -14,6 +14,7 @@
 <body>
 <div align = "center" >
 	<input type = "hidden" value = "${pg}" id = "pg"/>
+	<input type = "hidden" value = "5" name = "list_num" id = "list_num"/>
 	<table border = "0" cellpadding = "5" cellspacing = "0"  frame = "hsides" rules ="rows" id = "board_table">
 		<tr>
 			<th width = "100">글번호</th>
@@ -24,11 +25,20 @@
 		</tr>
 		
 		<c:if test = "${list != 'null' || list ne null}">
-
+	
 			<c:forEach var="boardDTO" items="${list}" varStatus = "i">
 				<tr>
 					<td class = "board">${boardDTO.seq}</td>
-					<td class = "board"><a href = "#" id = "view_aTag">${boardDTO.subject}</a></td>
+					<!-- 답글 밀어내기 -->
+					<td>
+					<!-- // class = "board" -->
+					
+					<c:forEach var = "lev" begin="0" end="${boardDTO.lev}">
+						&emsp;
+					</c:forEach>
+					<c:if test = "${boardDTO.lev != 0}">RE:	&nbsp;</c:if>
+					<a href = "#" id = "view_aTag">${boardDTO.subject}</a></td>
+					
 					<td class = "board">${boardDTO.id}</td>
 					<td class = "board">${boardDTO.logtime}</td>
 					<td class = "board">${boardDTO.hit}</td>
@@ -38,6 +48,10 @@
 		</c:if>
 	</table>
 	<br><br>
+	<input type = "button" value = "15개" class = "list_num_set_15"/>
+	<input type = "button" value = "5개" class = "list_num_set_5"/>
+	<!-- startNum, endNum, setPagingSize 건드려야함 -->
+	
 	
 </div>
 
@@ -46,7 +60,7 @@
 <div style = "float : center; border : 1px red solid; width : 600px; text-align : center;" align = "center">${boardPaging.pagingHTML}</div>
 </div>
 <script src = "http://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src ="../js/board.js">
+<script src ="../js/board.js?var=1">
 	
 </script>
 </body>

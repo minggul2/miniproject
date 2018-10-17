@@ -27,5 +27,15 @@ $(document).ready(function(){
 		location.href = 'boardModifyForm.do?seq='+seq+'&pg='+pg;
 	});
 	
+	$(".list_num_set_15").on('click', function(){
+		location.href = "boardList.do?list_num=15";
+	});
+	
+	$(".list_num_set_5").on('click', function(){
+		location.href = "boardList.do?list_num=5";
+	});
+	
+	//ajax 처리해야함 
+	
 	
 });
