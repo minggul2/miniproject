@@ -24,19 +24,19 @@ public class BoardPaging {
 		if(endPage > totalP) endPage = totalP;
 		
 		if(startPage > pageBlock) {
-			pagingHTML.append("[<a id = 'paging' href = 'boardList.do?pg="+(startPage-1)+"'>이전</a>]");
+			pagingHTML.append("[<a id = 'paging' href = '/miniproject/board/boardList.do?pg="+(startPage-1)+"'>이전</a>]");
 		}
 		
 		for(int i = startPage; i <= endPage; i++) {
 			if(currentPage == i) {
-				pagingHTML.append("[<a id = 'currentPage' href = 'boardList.do?pg="+i+"'>"+i+"</a>]");
+				pagingHTML.append("[<a id = 'currentPage' href = '/miniproject/board/boardList.do?pg="+i+"'>"+i+"</a>]");
 			}else {
-				pagingHTML.append("[<a id = 'paging' href = 'boardList.do?pg="+i+"'>"+i+"</a>]");
+				pagingHTML.append("[<a id = 'paging' href = '/miniproject/board/boardList.do?pg="+i+"'>"+i+"</a>]");
 			}
 		}
 		
 		if(endPage < totalP) {
-			pagingHTML.append("[<a id = 'paging' href = 'boardList.do?pg="+(endPage+1)+"'>다음</a>]");
+			pagingHTML.append("[<a id = 'paging' href = '/miniproject/board/boardList.do?pg="+(endPage+1)+"'>다음</a>]");
 		}
 		
 		

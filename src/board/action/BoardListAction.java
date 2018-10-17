@@ -26,14 +26,23 @@ public class BoardListAction implements CommandProcess {
 		
 		int pg = request.getParameter("pg") != null ? Integer.parseInt(request.getParameter("pg")) : 1; 
 		
+		System.out.println(request.getParameter("list_num"));
+			
+		int list_num = 5;
+		
+		if(request.getParameter("list_num") != null) {
+			list_num = Integer.parseInt(request.getParameter("list_num"));
+			System.out.println("¸®½ºÆ® ³Ñ¹ö = " + list_num);
+		}
 		
 		BoardDAO boardDAO = BoardDAO.getInstance();
 
 		//1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 5ï¿½ï¿½ï¿½ï¿½
-		int endNum = pg * 5;
-		int startNum = endNum - 4;
-		
+		int endNum = pg * list_num;
+		int startNum = endNum - (list_num-1);
+		System.out.println("º¯¼ö" + endNum + ", " + startNum);
 		List<BoardDTO> list = boardDAO.getList(startNum, endNum);
+		System.out.println("¸®½ºÆ®»çÀÌÁî"  + list.size());
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
 		
@@ -44,7 +53,8 @@ public class BoardListAction implements CommandProcess {
 		boardPaging.setCurrentPage(pg);
 		
 		boardPaging.setPageBlock(3);
-		boardPaging.setPageSize(5);
+		//boardPaging.setPageSize(5);
+		boardPaging.setPageSize(list_num);
 		boardPaging.setTotalA(totalA);
 		boardPaging.makePagingHTML();
 		
@@ -52,8 +62,16 @@ public class BoardListAction implements CommandProcess {
 		request.setAttribute("boardPaging", boardPaging);
 		request.setAttribute("pg", pg);
 		
-		request.setAttribute("display", "/board/boardList.jsp");
-		return "/main/index.jsp";
+		if(list_num == 5) {
+			request.setAttribute("display", request.getParameter("display"));
+			return "/board/boardList.jsp";
+		}else {
+			request.setAttribute("display", request.getParameter("display"));
+			return "/board/boardList.jsp";
+		}
+//		return "/main/index.jsp";
+		
+		/*return "/board/boardList.jsp";*/
 	}
 
 }

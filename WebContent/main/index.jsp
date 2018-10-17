@@ -19,7 +19,7 @@
 		<td colspan="1" align="center">
 			<jsp:include page = "../template/left.jsp"></jsp:include>	
 		</td>
-		<td colspan="3" align="center">
+		<td colspan="3" align="center" id = "display">
 			<jsp:include page="${display }"></jsp:include>
 		</td>		
 	</tr>

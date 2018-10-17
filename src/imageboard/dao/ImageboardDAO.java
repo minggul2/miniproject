@@ -1,4 +1,4 @@
-package board.dao;
+package imageboard.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,16 +16,16 @@ import javax.sql.DataSource;
 
 import board.bean.BoardDTO;
 
-public class BoardDAO {
-public static BoardDAO instance;
+public class ImageboardDAO {
+public static ImageboardDAO instance;
 	
-	public static BoardDAO getInstance() {
-		if(BoardDAO.instance == null) {
-			synchronized(BoardDAO.class) {
-				BoardDAO.instance = new BoardDAO();
+	public static ImageboardDAO getInstance() {
+		if(ImageboardDAO.instance == null) {
+			synchronized(ImageboardDAO.class) {
+				ImageboardDAO.instance = new ImageboardDAO();
 			}
 		}
-		return BoardDAO.instance;
+		return ImageboardDAO.instance;
 	}
 	
 	DataSource ds;
@@ -34,7 +34,7 @@ public static BoardDAO instance;
 	private PreparedStatement pstmt;
 	private ResultSet rs;
 	
-	public BoardDAO(){
+	public ImageboardDAO(){
 		try {
 			Context ctx = new InitialContext();
 			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/oracle");
@@ -45,20 +45,23 @@ public static BoardDAO instance;
 		
 	}
 	
-	public int writeBoard(Map<String, String> map) {
-		int su = 0;
+	public void writeImageboard(Map<String, String> map) {
 		
 		//���� ref = seq
-		String sql = "insert into board(seq, id, name, email, subject, content, ref) values(seq_board.nextval,?,?,?,?,?,seq_board.currval)";
+		String sql = "insert into imageboard values(seq_imageboard.nextval, ?, ?, ?, ?, ?, ?, sysdate)";
+		
 		try {
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, map.get("id"));
-			pstmt.setString(2, map.get("name"));
-			pstmt.setString(3, map.get("email"));
-			pstmt.setString(4, map.get("subject"));
-			pstmt.setString(5, map.get("content"));
-			su = pstmt.executeUpdate();
+			
+			pstmt.setString(1, map.get("imageId"));
+			pstmt.setString(2, map.get("imageName"));
+			pstmt.setString(3, map.get("imagePrice"));
+			pstmt.setString(4, map.get("imageQty"));
+			pstmt.setString(5, map.get("imageContent"));
+			pstmt.setString(6, map.get("image1"));
+			
+			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			
@@ -71,7 +74,6 @@ public static BoardDAO instance;
 			}
 		}
 		
-		return su;
 	}
 	
 	public List<BoardDTO> getList(int startNum, int endNum){

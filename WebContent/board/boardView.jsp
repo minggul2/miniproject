@@ -19,11 +19,12 @@
 		
 		<tr>
 			<td width = "150" align = "center">글번호 : ${boardDTO.seq}</td>
-			<td width = "150" align = "center">작성자 : ${boardDTO.id}</td>
+			<td width = "150" align = "center">작성자 : ${boardDTO.id}${boardDTO.lev}</td>
 			<td width = "150" align = "center">조회수 : ${boardDTO.hit}</td>
 		</tr>
 		
 		<tr>
+			
 			<td height = "250" colspan = "3" valign = "top"><pre>${boardDTO.content}</pre></td>
 		</tr>
 	</table>
@@ -34,7 +35,7 @@
 	<input type = "button" value = "답글" onclick = "location.href = 'boardReplyForm.do?pseq=${boardDTO.seq}&pg=${pg}'">
 	<c:if test="${memId == boardDTO.id}">
 		<input type = "button" value = "글수정" id = "board_modify_button">
-		<input type = "button" value = "글삭제">
+		<input type = "button" value = "글삭제" onclick = "location.href = 'boardDelete.do?pseq=${boardDTO.pseq}&seq=${boardDTO.seq}&pg=${pg}'">
 	</c:if>
 	</div>
 	<script src = "http://code.jquery.com/jquery-3.3.1.min.js"></script>

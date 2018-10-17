@@ -22,7 +22,7 @@
 <body>
 	<form name = "boardWriteForm" method = "post" action = "boardReply.do" id = "board_write_form">
 	<input type = "hidden" value = "${pg}"  name = "pg"/>
-	<input type = "hidden" value = "${pseq}" name = "seq"/>
+	<input type = "hidden" value = "${pseq}" name = "pseq"/>
 	<table border = "1">
 		<tr>
 			<td class = "shows">제목</td>
