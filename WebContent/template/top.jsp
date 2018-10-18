@@ -11,6 +11,7 @@
 		<a href = "/miniproject/imageboard/imageboardWriteForm.do" style = "background-color : silver;">이미지등록</a> |
 	</c:if>
 		<a href = "#" class = "board_list_a" >목록</a> |
-		<a href = "/miniproject/imageboard/imageboardList.do?pg=1">이미지목록</a> 
+		<a href = "#" class = "imageboard_list_a">이미지목록</a> 
+		
 		<!-- <a href = "/miniproject/board/boardList.do">목록</a> -->
 		

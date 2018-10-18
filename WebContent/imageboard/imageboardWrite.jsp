@@ -10,7 +10,8 @@
 	<script>
 		window.onload=function(){
 			alert("글쓰기 성공");
-			location.href="boardList.do?pg=1";
+			
+			history.back();
 		}
 	</script>
 </body>

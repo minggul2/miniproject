@@ -8,5 +8,7 @@
  </script>
  <script src = "../js/board.js">
  </script>
+ <script src = "../js/imageboard.js">
+ </script>
 	</body>
 </html>

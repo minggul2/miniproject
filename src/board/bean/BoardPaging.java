@@ -25,7 +25,7 @@ public class BoardPaging {
 		
 		if(startPage > pageBlock) {
 //			pagingHTML.append("[<a id = 'paging' href = '/miniproject/board/boardList.do?pg="+(startPage-1)+"'>이전</a>]");
-			pagingHTML.append("[<a id = 'paging' class = 'prev_page' href = '#'>이전</a>]");
+			pagingHTML.append("[<a id = 'paging' class = "+"'"+(startPage-1)+"_page' href = '#'>이전</a>]");
 		}
 		
 		for(int i = startPage; i <= endPage; i++) {
@@ -40,7 +40,7 @@ public class BoardPaging {
 		
 		if(endPage < totalP) {
 //			pagingHTML.append("[<a id = 'paging' href = '/miniproject/board/boardList.do?pg="+(endPage+1)+"'>다음</a>]");
-			pagingHTML.append("[<a id = 'paging' class = 'page_"+(endPage+1)+"' href = '#'>다음</a>]");
+			pagingHTML.append("[<a id = 'paging' class = "+"'"+(endPage+1)+"_page' href = '#'>다음</a>]");
 		}
 		
 		

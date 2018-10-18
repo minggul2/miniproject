@@ -15,6 +15,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import board.bean.BoardDTO;
+import imageboard.bean.ImageboardDTO;
 
 public class ImageboardDAO {
 public static ImageboardDAO instance;
@@ -22,7 +23,7 @@ public static ImageboardDAO instance;
 	public static ImageboardDAO getInstance() {
 		if(ImageboardDAO.instance == null) {
 			synchronized(ImageboardDAO.class) {
-				ImageboardDAO.instance = new ImageboardDAO();
+				instance = new ImageboardDAO();
 			}
 		}
 		return ImageboardDAO.instance;
@@ -45,26 +46,26 @@ public static ImageboardDAO instance;
 		
 	}
 	
-	public void writeImageboard(Map<String, String> map) {
+	public void writeImageboard(ImageboardDTO imageboardDTO) {
 		
 		//���� ref = seq
 		String sql = "insert into imageboard values(seq_imageboard.nextval, ?, ?, ?, ?, ?, ?, sysdate)";
+		
 		
 		try {
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1, map.get("imageId"));
-			pstmt.setString(2, map.get("imageName"));
-			pstmt.setInt(3, Integer.parseInt(map.get("imagePrice")));
-			pstmt.setInt(4, Integer.parseInt(map.get("imageQty")));
-			pstmt.setString(5, map.get("imageContent"));
-			pstmt.setString(6, map.get("image1"));
+			pstmt.setString(1, imageboardDTO.getImageId());
+			pstmt.setString(2, imageboardDTO.getImageName());
+			pstmt.setInt(3, imageboardDTO.getImagePrice());
+			pstmt.setInt(4, imageboardDTO.getImageQty());
+			pstmt.setString(5, imageboardDTO.getImageContent());
+			pstmt.setString(6, imageboardDTO.getImage1());
 			
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
-			
 		} finally {
 			try {
 				if(pstmt != null)pstmt.close();
@@ -76,14 +77,14 @@ public static ImageboardDAO instance;
 		
 	}
 	
-	public List<BoardDTO> getList(int startNum, int endNum){
-		List<BoardDTO> list = new ArrayList<>();
-		BoardDTO boardDTO = null;
+	public List<ImageboardDTO> getList(int startNum, int endNum){
+		List<ImageboardDTO> list = new ArrayList<>();
+		ImageboardDTO imageboardDTO = null;
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
 		
 		String sql = "select * from "
 				+ "(select rownum rn, tt.* from "
-				+ "(select * from board order by ref desc, step asc) tt)"
+				+ "(select * from imageboard order by seq desc) tt)"
 				+ " where rn >= ? and rn <= ?";
 		try {
 			conn = ds.getConnection();
@@ -92,21 +93,17 @@ public static ImageboardDAO instance;
 			pstmt.setInt(2, endNum);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
-				boardDTO = new BoardDTO();
-				boardDTO.setSeq(rs.getInt("seq"));
-				boardDTO.setId(rs.getString("id"));
-				boardDTO.setName(rs.getString("name"));
-				boardDTO.setEmail(rs.getString("email"));
-				boardDTO.setSubject(rs.getString("subject"));
-				boardDTO.setContent(rs.getString("content"));
-				boardDTO.setRef(rs.getInt("ref"));
-				boardDTO.setLev(rs.getInt("lev"));
-				boardDTO.setStep(rs.getInt("step"));
-				boardDTO.setPseq(rs.getInt("pseq"));
-				boardDTO.setReply(rs.getInt("reply"));
-				boardDTO.setHit(rs.getInt("hit"));
-				boardDTO.setLogtime(sdf.format(rs.getDate("logtime")));
-				list.add(boardDTO);
+				imageboardDTO = new ImageboardDTO();
+				
+				imageboardDTO.setSeq(rs.getInt("seq"));
+				imageboardDTO.setImageId(rs.getString("imageId"));
+				imageboardDTO.setImageName(rs.getString("imageName"));
+				imageboardDTO.setImagePrice(rs.getInt("imagePrice"));
+				imageboardDTO.setImageQty(rs.getInt("imageQty"));
+				imageboardDTO.setImageContent(rs.getString("imageContent"));
+				imageboardDTO.setImage1(rs.getString("image1"));
+				imageboardDTO.setLogtime(rs.getString("logtime"));
+				list.add(imageboardDTO);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -125,7 +122,7 @@ public static ImageboardDAO instance;
 	
 	public int getBoardTotalA() {
 		int totalA = 0;
-		String sql = "select count(*) from board";
+		String sql = "select count(*) from imageboard";
 		
 		try {
 			conn = ds.getConnection();

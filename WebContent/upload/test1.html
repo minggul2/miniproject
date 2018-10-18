@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.item {
+margin-top: 27px;
+position: relative;
+padding: 10px 0 11px;
+border-bottom: 1px solid #dddfe4;
+font-weight: 400;
+font-size: 16px;
+vertical-align: baseline;
+word-break: keep-all;
+transition: border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+&:focus-within {
+border-color: #1ea1f7;
+}
+.input {
+position: relative;
+z-index: 1;
+border: 0;
+padding: 0;
+outline: 0;
+background-color: transparent;
+line-height: 19px;
+width: 100%;
+&:focus+label {
+transform: scale(0.75) translateY(-39px);
+color: #1ea1f7;
+}
+&:not([value=""])+label {
+transform: scale(0.75) translateY(-39px);
+}
+}
+.label {
+pointer-events: none;
+line-height: 19px;
+color: #7b858e;
+position: absolute;
+bottom: 3px;
+left: 0;
+top: 11px;
+transform-origin: bottom left;
+transition: bottom, transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+}
+</style>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+	<div className={cx("item")}>
+	<input className={cx("input")} type="email"/>
+	<label className={cx("label")}>이메일 주소</label>
+	</div>
+	<div className={cx("item")}>
+	<input className={cx("input")} type="password" />
+	<label className={cx("label")}>비밀번호</label>
+	</div>
+</div>
+</body>
+</html>

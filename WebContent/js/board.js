@@ -37,19 +37,13 @@ $(document).ready(function(){
 	});
 	
 	//페이지 이동 a태그 이벤트
-	$('#display').on('click', 'a', function(){
+	$('#display').on('click', '#paging_div > a', function(){
 		
 		var pg = $(this).html();
+		var pg_move = parseInt($(this).attr('class'));
 		
-		var pg_move = $(this).attr('class');
-		alert(pg_move);
-		alert(parseInt(pg_move));
-		
-		var test = parseInt(pg_move);
-		alert(test);
-		
-		if(!(parseInt(pg_move))){
-			alert(pg_move);
+		if(pg_move){	//pg_move가 숫자가아니라면
+			pg = parseInt($(this).attr('class'));
 		}
 		
 		$.ajax({
@@ -57,20 +51,19 @@ $(document).ready(function(){
 			url : "/miniproject/board/boardList.do",	//boardList.do를 여기서 호출함	이부분에서 url요청으로 인해 index.jsp 까지 감
 			data : {"list_num" : list_num, "display" : '/board/boardList.jsp', "pg" : pg},		//boardList.do 에서 필요한 list_num 정보 담아감 display는 필요없을거같음
 			dataType : "html",	//html, text, json
-			success : function(data){	//이 영역은 비동기임
-				
-				$('#display').html(data);	//여기가 상당히 중요한데 <jsp:include page = "${display}"> 영역을 아예 갈아치워버림
+			success : function(data){	//이 영역은 비동기 아래 코드가 끝나고 실행됨
+				$('#display').html(data);	//여기가 중요한데 <jsp:include page = "${display}"> 영역을 아예 갈아치워버림
 			}
 			///miniproject/board/boardList.do
 		});
 	});
 	
-	//boardList ajax
+	//페이지이동 top.jsp의 목록
 	$(document).on('click', '.board_list_a', function(){
 		//list_num = 5;	//기본값 5로설정
 		if(!isNaN(parseInt($(this).attr('value')))){	//.board_list_a 공유하는 class는 top.jsp의 a태그와 boardList.jsp의 10목록버튼, 5목록버튼 그중 10목록, 5목록눌렀을경우
 			list_num = parseInt($(this).attr('value'));
-			alert(list_num);
+			//alert("페이지 게시글 개수 : " + list_num);
 		}
 		
 		$.ajax({
