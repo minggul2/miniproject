@@ -56,8 +56,8 @@ public static ImageboardDAO instance;
 			
 			pstmt.setString(1, map.get("imageId"));
 			pstmt.setString(2, map.get("imageName"));
-			pstmt.setString(3, map.get("imagePrice"));
-			pstmt.setString(4, map.get("imageQty"));
+			pstmt.setInt(3, Integer.parseInt(map.get("imagePrice")));
+			pstmt.setInt(4, Integer.parseInt(map.get("imageQty")));
 			pstmt.setString(5, map.get("imageContent"));
 			pstmt.setString(6, map.get("image1"));
 			

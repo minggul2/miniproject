@@ -7,7 +7,7 @@
   	<servlet-class>com.control.ControlServlet</servlet-class>
   	<init-param>
   		<param-name>propertyConfig</param-name>
-  		<param-value>D:\\java_ee\\workspace\\miniproject\\WebContent\\WEB-INF\\command.properties</param-value>
+  		<param-value>C:\\Users\\minggul\\git\\miniproject\\WebContent\WEB-INF\\command.properties</param-value>
   	</init-param>
   </servlet>
   <servlet-mapping>

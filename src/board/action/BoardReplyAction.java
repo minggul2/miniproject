@@ -43,6 +43,7 @@ public class BoardReplyAction implements CommandProcess {
 		request.setAttribute("display", "/board/boardReply.jsp");
 		request.setAttribute("pg", pg);
 				
-		return "/board/boardList.do?pg="+pg;
+		//return "/board/boardList.do?pg="+pg;
+		return "/main/index.jsp";
 	}
 }

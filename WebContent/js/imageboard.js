@@ -6,6 +6,7 @@ $(document).ready(function(){
 		$('#imagePrice_div').empty();
 		$('#imageQty_div').empty();
 		$('#imageContent_div').empty();
+		$('#image1_div').empty();
 		
 		
 		if($('#imageId').val() == ''){
@@ -18,9 +19,10 @@ $(document).ready(function(){
 			$('#imageQty_div').html("상품개수를 입력하세요").css('color', 'red').css('font-size', '9pt');
 		}else if($('#imageContent').val() == ''){
 			$('#imageContent_div').html("상품내용을 입력하세요").css('color', 'red').css('font-size', '9pt');
-		}else if($('image1').val() == ''){
-			alert("");
+		}else if($('#image1').val() == ''){
+			$('#image1_div').html("파일을 선택하세요").css('color', 'red').css('font-size', '9pt');
 		}else{
+			alert("서브밋합니다");
 			$('#img_board_form').submit();
 		}
 	});

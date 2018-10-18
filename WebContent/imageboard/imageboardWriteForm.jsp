@@ -17,7 +17,7 @@
 </style>
 </head>
 <body>
-<form id = "img_board_form"  enctype="multipart/form-data" action = "imageboardWrite.do" method = "post">
+<form id = "img_board_form"  method = "post" enctype="multipart/form-data" action = "imageboardWrite.do" >
 	<table>
 		<tr>
 			<th>상품코드</th>
@@ -61,14 +61,15 @@
 		
 		<tr>
 			<td colspan = "2">
-				<input type = "file" size = "50" name = "image1">
-				<div id = "image1_div"></div>
+				<input type = "file" size = "50" name = "image1" id = "image1">
+				<div id = "image1_div"></div> 
 			</td>
 		</tr>
 		
 		<tr>
 			<td colspan = "2">
-				<input type = "button" value = "이미지등록" id = "img_write_btn" />	
+				<input type = "button" value = "이미지등록" id = "img_write_btn" />
+				<!-- <input type = "submit" value = "이미지등록" /> -->	
 				<input type = "reset" value = "다시작성" /> 
 			</td>
 		</tr>
