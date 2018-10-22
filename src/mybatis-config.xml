@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias type = "member.bean.MemberDTO" alias = "member"/>
+		<typeAlias type = "board.bean.BoardDTO" alias = "board"/>
+		<typeAlias type = "imageboard.bean.ImageboardDTO" alias = "imageboard"/>		
+	</typeAliases>
+	<environments default="development">
+		<environment id = "development">
+			<transactionManager type = "JDBC"/>
+			<!-- type : POOLED, UNPOOLED, JNDI (Java Naming and Directory Interface) -->
+			<!-- 커네션풀 사용여부 -->
+			<dataSource type ="POOLED">
+				<property name = "driver" value = "oracle.jdbc.driver.OracleDriver"/>
+				<property name = "url" value = "jdbc:oracle:thin:@localhost:1521:xe"/>
+				<property name = "username" value = "dbdb"/>
+				<property name = "password" value = "itbank"/>
+			</dataSource>
+		</environment>
+	</environments>
+	
+	<!-- DAO 개수만큼 mapper 파일 필요 -->
+	<mappers>
+		<mapper resource="member/dao/memberMapper.xml"/>
+ 		<mapper resource="board/dao/boardMapper.xml"/>
+		<!-- <mapper resource="imageboard/dao/imageboardMapper.xml"/> -->
+	</mappers>
+</configuration>

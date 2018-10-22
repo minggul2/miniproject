@@ -1,7 +1,9 @@
 package board.action;
 
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,22 +28,31 @@ public class BoardListAction implements CommandProcess {
 		
 		int pg = request.getParameter("pg") != null ? Integer.parseInt(request.getParameter("pg")) : 1; 
 		
-		System.out.println(request.getParameter("list_num"));
-			
+		int list_num;
+		if(request.getParameter("list_num") != null) {
+			list_num = Integer.parseInt(request.getParameter("list_num"));
+			System.out.println("¸®½ºÆ® ³Ñ¹ö = " + list_num);
+		}else {
+			list_num = 5;
+		}
+		/*
 		int list_num = 5;
 		
 		if(request.getParameter("list_num") != null) {
 			list_num = Integer.parseInt(request.getParameter("list_num"));
-			System.out.println("¸®½ºÆ® ³Ñ¹ö = " + list_num);
+		System.out.println("¸®½ºÆ® ³Ñ¹ö = " + list_num);
 		}
-		
+		*/
 		BoardDAO boardDAO = BoardDAO.getInstance();
 
 		//1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 5ï¿½ï¿½ï¿½ï¿½
 		int endNum = pg * list_num;
 		int startNum = endNum - (list_num-1);
 		System.out.println("º¯¼ö" + endNum + ", " + startNum);
-		List<BoardDTO> list = boardDAO.getList(startNum, endNum);
+		Map<String, Integer> map = new HashMap<>();
+		map.put("startNum", startNum);
+		map.put("endNum", endNum);
+		List<BoardDTO> list = boardDAO.getList(map);
 		System.out.println("¸®½ºÆ®»çÀÌÁî"  + list.size());
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");

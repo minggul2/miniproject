@@ -1,4 +1,4 @@
-package memberjsp.bean;
+package member.bean;
 
 import lombok.Data;
 

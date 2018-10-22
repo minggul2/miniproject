@@ -1,14 +1,18 @@
 package member.action;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.control.CommandProcess;
 
+import member.bean.ZipcodeDTO;
 import member.dao.MemberDAO;
-import memberjsp.bean.ZipcodeDTO;
+import member.dao.MemberDAO_test;
 
 public class CheckPostAction implements CommandProcess{
 
@@ -18,14 +22,21 @@ public class CheckPostAction implements CommandProcess{
 		String sido = request.getParameter("sido");
 		String sigungu = request.getParameter("sigungu");
 		String roadname = request.getParameter("roadname");
-		ArrayList<ZipcodeDTO> list = null; 
+		List<ZipcodeDTO> list = null; 
 		ArrayList<String> address = null; 
 		//DB
 		
 		if(sido != null && sigungu != null && roadname != null){
 			//DB로가라 메소드명 : getZipcodeList
 			MemberDAO memberDAO = MemberDAO.getInstance();
-			list = memberDAO.getZipcodeList(sido, sigungu, roadname);
+			Map<String, String> map = new HashMap<>();
+			map.put("sido", sido);
+			map.put("sigungu", sigungu);
+			map.put("roadname", roadname);
+			
+			//list = memberDAO.getZipcodeList(sido, sigungu, roadname);
+			list = memberDAO.getZipcodeList(map);
+			
 			for(ZipcodeDTO zipcodeDTO : list) {
 				address = new ArrayList<>();
 				address.add(zipcodeDTO.getSido() + " "

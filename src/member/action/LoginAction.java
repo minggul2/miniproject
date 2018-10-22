@@ -1,13 +1,16 @@
 package member.action;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.control.CommandProcess;
 
+import member.bean.MemberDTO;
 import member.dao.MemberDAO;
-import memberjsp.bean.MemberDTO;
 
 public class LoginAction implements CommandProcess{
 
@@ -19,9 +22,14 @@ public class LoginAction implements CommandProcess{
 		String id = request.getParameter("login_id");
 		String password = request.getParameter("login_password");
 		
+		Map<String, String> map = new HashMap<>();
+		map.put("id", id);
+		map.put("password", password);
+		
 		//DB
 		MemberDAO memberDAO = MemberDAO.getInstance();
-		MemberDTO memberDTO = memberDAO.login(id, password);
+		MemberDTO memberDTO = memberDAO.login(map);
+		
 		
 		request.setAttribute("display", "/template/body.jsp");
 		//¿¿¥‰	

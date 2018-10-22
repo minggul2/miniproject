@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="boardSQL">
+	<insert id = "writeBoard" parameterType = "HashMap">
+		insert into board values(seq_board.nextval,
+							#{id},
+							#{name},
+							#{email},
+							#{subject},
+							#{content},
+							seq_board.currval,
+							0,
+							0,
+							0,
+							0,
+							0,
+							sysdate)
+	</insert>
+	
+	<select id = "getList" parameterType = "HashMap" resultType = "board">
+		select * from
+			(select rownum rn, tt.* from
+				(select * from board order by ref desc, step asc) tt)
+			where rn <![CDATA[>=]]> #{startNum} and rn <![CDATA[<=]]> #{endNum}
+	</select>
+	
+	<select id = "getBoardTotalA" resultType = "int">
+		select count(*) from board
+	</select>
+	
+	<select id = "boardView" parameterType = "int" resultType = "board">
+		select * from board where seq = #{seq}
+	</select>
+	
+	<update id = "hitUpdate" parameterType = "int">
+		update board set hit = hit + 1 where seq = #{seq}
+	</update>
+	
+	<update id = "boardModify" parameterType = "HashMap">
+		update board set subject = #{subject},
+							content = #{content},
+							logtime = sysdate
+							where seq = #{seq}
+	</update>
+	
+	<!-- 답글등록 -->
+	<update id = "boardReply_step" parameterType = "board">
+		update board set step = step +1 where ref = #{ref} and step > #{step}
+	</update>
+	
+	<insert id = "boardReply_insert" parameterType = "board">
+		insert into board values(seq_board.nextval,
+									#{id},
+									#{name},
+									#{email},
+									#{subject},
+									#{content},
+									#{ref},
+									#{lev}+1,
+									#{step}+1,
+									#{seq},
+									0,
+									0,
+									sysdate)
+		
+	</insert>
+	
+	<update id = "boardReply_hit" parameterType = "int">
+		update board set reply = reply +1 where seq = #{seq}
+	</update>
+	
+</mapper>

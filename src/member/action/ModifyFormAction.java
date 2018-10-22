@@ -10,8 +10,8 @@ import org.json.JSONObject;
 
 import com.control.CommandProcess;
 
+import member.bean.MemberDTO;
 import member.dao.MemberDAO;
-import memberjsp.bean.MemberDTO;
 
 public class ModifyFormAction implements CommandProcess{
 

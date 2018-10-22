@@ -15,13 +15,13 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import member.bean.MemberDTO;
 import member.bean.ZipcodeDTO;
 
-public class MemberDAO {
-	public static MemberDAO instance;
+public class MemberDAO_test extends MemberDAO{
+	public static MemberDAO_test instance;
 	
-	public static MemberDAO getInstance() {
-		if(MemberDAO.instance == null) {
-			synchronized(MemberDAO.class) {
-				instance = new MemberDAO();
+	public static MemberDAO_test getInstance() {
+		if(MemberDAO_test.instance == null) {
+			synchronized(MemberDAO_test.class) {
+				instance = new MemberDAO_test();
 				System.out.println("객체생성");
 			}
 		}
@@ -31,7 +31,7 @@ public class MemberDAO {
 	private SqlSessionFactory sqlSessionFactory;
 	
 	
-	public MemberDAO() {
+	public MemberDAO_test() {
 		try {
 			Reader reader = Resources.getResourceAsReader("mybatis-config.xml");
 			sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
@@ -41,6 +41,7 @@ public class MemberDAO {
 		}
 	}
 	
+	@Override
 	public boolean isExitsId(String id) {
 		boolean check = false;
 		System.out.println("아이디는 : " + id);
