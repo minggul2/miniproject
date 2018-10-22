@@ -12,7 +12,6 @@ import com.control.CommandProcess;
 
 import member.bean.ZipcodeDTO;
 import member.dao.MemberDAO;
-import member.dao.MemberDAO_test;
 
 public class CheckPostAction implements CommandProcess{
 
@@ -30,6 +29,7 @@ public class CheckPostAction implements CommandProcess{
 			//DB로가라 메소드명 : getZipcodeList
 			MemberDAO memberDAO = MemberDAO.getInstance();
 			Map<String, String> map = new HashMap<>();
+			System.out.println(sigungu + " " + roadname + " ?");
 			map.put("sido", sido);
 			map.put("sigungu", sigungu);
 			map.put("roadname", roadname);

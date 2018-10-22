@@ -22,6 +22,11 @@ public class BoardModifyFormAction implements CommandProcess {
 		String id = (String)request.getSession().getAttribute("memId");
 		
 		request.setAttribute("display", "/board/boardModifyForm.jsp?pg="+pg+"&seq="+seq);
+		request.setAttribute("seq", seq);
+		request.setAttribute("pg", pg);
+		request.setAttribute("subject", boardDTO.getSubject());
+		request.setAttribute("content", boardDTO.getContent());
+		
 		
 		return "/main/index.jsp";
 	}

@@ -8,18 +8,14 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<script src = "http://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src = "../js/board.js"></script>
 	<script>
-	/*
-		window.onload = function(){
-			alert("글쓰기 성공");ㅣ
-			location.href = 'boardList.jsp';
-		}
-	*/
 	//		alert("작성하신글을 저장하였습니다");
-		window.onload=function(){
-			alert("글쓰기 성공");
-			location.href="boardList.do?pg=1";
-		}
+	$(document).ready(function(){
+		alert("글쓰기 성공");
+		$('#paging_div > a, .board_list_a').trigger('click');
+	});
 	</script>
 </body>
 </html>

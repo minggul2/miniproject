@@ -64,11 +64,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 									0,
 									0,
 									sysdate)
-		
 	</insert>
 	
 	<update id = "boardReply_hit" parameterType = "int">
 		update board set reply = reply +1 where seq = #{seq}
 	</update>
 	
+	<!-- 게시글삭제 -->
+	<update id = "boardDelete_reply" parameterType = "int">
+		update board set reply = reply -1 where seq = #{seq}
+	</update>
+	
+	<update id = "boardDelete_subejct" parameterType = "Map">
+		update board set subject = #{subject_add} || subject where pseq = #{pseq}
+	</update>
+	
+	<delete id = "boardDelete_board" parameterType = "int">
+		delete board where seq = #{seq}
+	</delete>
+	
+	<!-- 게시글 수정 -->
+	<update id = "board_Modify" parameterType = "Map">
+		update board set subject = #{subject},
+							content = #{content},
+							logtime = sysdate
+							where seq = #{seq}
+	</update>
+	 
 </mapper>

@@ -26,6 +26,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	<mappers>
 		<mapper resource="member/dao/memberMapper.xml"/>
  		<mapper resource="board/dao/boardMapper.xml"/>
-		<!-- <mapper resource="imageboard/dao/imageboardMapper.xml"/> -->
+		<mapper resource="imageboard/dao/imageboardMapper.xml"/>
 	</mappers>
 </configuration>

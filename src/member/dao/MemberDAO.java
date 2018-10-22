@@ -11,6 +11,7 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.json.JSONObject;
 
 import member.bean.MemberDTO;
 import member.bean.ZipcodeDTO;
@@ -60,6 +61,9 @@ public class MemberDAO {
 	
 	public List<ZipcodeDTO> getZipcodeList(Map<String, String> map){
 		SqlSession sqlSession = sqlSessionFactory.openSession();
+		System.out.println("시도 : " +map.get("sido"));
+		System.out.println("시군구 : " +map.get("sigungu"));
+		System.out.println("도로명 : " +map.get("roadname"));
 		List<ZipcodeDTO> list = sqlSession.selectList("memberSQL.getZipcodeList", map);
 		sqlSession.close();
 		
@@ -87,6 +91,13 @@ public class MemberDAO {
 		sqlSession.commit();
 		sqlSession.close();
 		return su;
+	}
+
+	public JSONObject getMemberJson(String id) {
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		sqlSession.selectOne("memberSQL.getMemberJson", id);
+		
+		return null;
 	}
 	
 	

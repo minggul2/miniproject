@@ -2,8 +2,8 @@ $(document).ready(function(){
 	
 	var list_num = 5;
 	var pg = 1;
-	$('#board_write_button').on('click', function(){
-		
+	$(document).on('click', '#board_write_button', function(){
+		alert("");
 		$('#content_div').empty();
 		$('#subject_div').empty();
 		

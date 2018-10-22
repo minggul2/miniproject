@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.control.CommandProcess;
 
 import member.dao.MemberDAO;
-import member.dao.MemberDAO_test;
 
 public class CheckIdAction implements CommandProcess{
 
@@ -20,7 +19,7 @@ public class CheckIdAction implements CommandProcess{
 		
 		/*MemberDAO memberDAO = MemberDAO.getInstance();
 		boolean check = memberDAO.isExitsId(id);*/
-		MemberDAO_test memberDAO = MemberDAO_test.getInstance();
+		MemberDAO memberDAO = MemberDAO.getInstance();
 		boolean check = memberDAO.isExitsId(id);
 		
 		
