@@ -57,13 +57,8 @@ public static BoardDAO instance;
 	}
 	
 	public List<BoardDTO> getList(Map<String, Integer> map){
-		
-		List<BoardDTO> list;
-		BoardDTO boardDTO = null;
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
-		//오라클에서 포메팅필요
 		SqlSession sqlSession = sqlSessionFactory .openSession();
-		list = sqlSession.selectList("boardSQL.getList", map);
+		List<BoardDTO> list = sqlSession.selectList("boardSQL.getList", map);
 		sqlSession.close();
 		return list;
 	}
@@ -136,6 +131,22 @@ public static BoardDAO instance;
 		sqlSession.close();
 		
 	}
+
+	public List<BoardDTO> boardSearch(Map<String, String> map) {
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		List<BoardDTO> list = sqlSession.selectList("boardSQL.boardSearch", map);
+		sqlSession.close();
+		return list;
+	}
+
+	public int getBoardSearchTotalA(Map<String, String> map) {
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		int su = sqlSession.selectOne("boardSQL.getBoardSearchTotalA", map);
+		sqlSession.close();
+		return su;
+	}
+	
+	
 }
 
 

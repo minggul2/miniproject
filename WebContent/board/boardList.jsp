@@ -13,7 +13,6 @@
 </head>
 <body>
 <div align = "center" >
-	<input type = "hidden" value = "${pg}" id = "pg"/>
 	<input type = "hidden" value = "${list_num}" id = "list_num" name = "list_num">
 	<table border = "0" cellpadding = "5" cellspacing = "0"  frame = "hsides" rules ="rows" id = "board_table">
 		<tr>
@@ -63,16 +62,13 @@
 </div>
 <form action = "/miniproject/board/boardSearch.do" method = "post" >
 	<div>
-		<select id = "search_select" name = "searchOption">
+		<input type = "hidden" name = "pg" id = "pg" value = "${pg}">
+		<select name = "searchOption" id = "select_option">
 			<option selected="selected">제목</option>
 			<option>아이디</option>
 		</select>
-		<input type = "text" name = "keyword" />
-		<input type = "submit" id = "search_btn" value = "검색" />
+		<input type = "text" name = "keyword" id = "keyword"/>
+		<input type = "button" id = "search_btn" value = "검색" />
 	</div>
 </form>
-<!-- <script src = "http://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src ="../js/board.js"></script> -->
-	
-</body>
 </html>

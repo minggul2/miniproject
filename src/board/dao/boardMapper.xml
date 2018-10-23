@@ -95,5 +95,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 							logtime = sysdate
 							where seq = #{seq}
 	</update>
+	
+	<!--  게시글 검색 -->
+	<select id = "boardSearch" parameterType = "Map" resultType = "board">
+		select * from
+			(select rownum rn, tt.* from
+				(select * from board where ${searchOption} like '%'||#{keyword}||'%' order by ref desc, step asc) tt)
+			where rn <![CDATA[>=]]> #{startNum} and rn <![CDATA[<=]]> #{endNum}
+	</select>
+	
+	<!-- 검색결과 사이즈 반환 -->
+	<select id = "getBoardSearchTotalA" parameterType = "Map" resultType = "int">
+		select count(*) from board where ${searchOption} like '%'||#{keyword}||'%'
+	</select>
+	
 	 
 </mapper>

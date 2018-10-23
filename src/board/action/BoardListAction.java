@@ -22,7 +22,7 @@ public class BoardListAction implements CommandProcess {
 		
 		if(request.getParameter("pg") != null) {
 			pg = Integer.parseInt(request.getParameter("pg"));
-		}else {
+	}else {
 			pg = 1;
 		}*/
 		
@@ -55,7 +55,6 @@ public class BoardListAction implements CommandProcess {
 		List<BoardDTO> list = boardDAO.getList(map);
 		System.out.println("리스트사이즈"  + list.size());
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
 		
 		
 		int totalA = boardDAO.getBoardTotalA();

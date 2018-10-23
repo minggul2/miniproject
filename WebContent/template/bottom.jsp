@@ -4,13 +4,8 @@
 		</td>
 	</tr>	
 </table>
-	
-		 <script src = "http://code.jquery.com/jquery-3.3.1.min.js"></script>
-		 <script src = "../js/member.js">
-		 </script>
-		 <script src = "../js/board.js">
-		 </script>
-		 <script src = "../js/imageboard.js">
-		 </script>
 	</body>
 </html>
+<script src = "http://code.jquery.com/jquery-3.3.1.min.js"></script>
+		 	<script src = "../js/board.js"></script>
+		 	<script src = "../js/imageboard.js"></script>

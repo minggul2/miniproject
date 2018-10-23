@@ -38,7 +38,5 @@
 		<input type = "button" value = "글삭제" onclick = "location.href = 'boardDelete.do?pseq=${boardDTO.pseq}&seq=${boardDTO.seq}&pg=${pg}'">
 	</c:if>
 	</div>
-	<script src = "http://code.jquery.com/jquery-3.3.1.min.js"></script>
-	<script src = "../js/board.js"></script>
 </body>
 </html>

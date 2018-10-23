@@ -20,7 +20,7 @@
 			<jsp:include page = "../template/left.jsp"></jsp:include>	
 		</td>
 		<td colspan="3" align="center" id = "display">
-			<jsp:include page="${display }"></jsp:include>
+			<jsp:include page="${display }" flush="true"></jsp:include>
 		</td>		
 	</tr>
 	
