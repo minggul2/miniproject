@@ -80,88 +80,13 @@ public static ImageboardDAO instance;
 		return imageboardDTO;
 	}	 
 	
-	public void hitUpdate(int seq) {
-		String sql = "update board set hit = hit+1 where seq = ?";
+	public ImageboardDTO imageboardView(int seq) {
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		ImageboardDTO imageboardDTO = sqlSession.selectOne("imageboardSQL.imageboardView", seq);
 		
-		try {
-			conn = ds.getConnection();
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, seq);
-			pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if(pstmt!=null)pstmt.close();
-				if(conn!=null)conn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-	
-	public void boardModify(String subject, String content, int seq) {
-		String sql = "update board set subject = ?,"
-				+ " 					content = ?,"
-				+ " 					logtime = sysdate where seq = ?";
-		
-		try {
-			conn = ds.getConnection();
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, subject);
-			pstmt.setString(2, content);
-			pstmt.setInt(3, seq);
-			pstmt.executeUpdate();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if(pstmt!=null)pstmt.close();
-				if(conn!=null)conn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-
-	//삭제
-	public void boardDelete(int seq, int pseq) {
-		
-		try {
-			/*String sql = "update board set reply = reply -1 where seq = (select pseq from board where seq = ?)";*/
-			
-			String sql = "update board set reply = reply - 1 where seq = ?";
-			conn = ds.getConnection();
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, pseq);
-			pstmt.executeUpdate();
-			
-			sql = "update board set subject = ? || subject where pseq = ?";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, "[원글이 삭제된 답글]" );
-			pstmt.setInt(2, seq);
-			pstmt.executeUpdate();
-			
-			sql = "delete board where seq = ?";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, seq);
-			pstmt.executeUpdate();
-			
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if(pstmt!=null)pstmt.close();
-				if(conn!=null)conn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
+		return imageboardDTO;
 		
 	}
-	
 	
 }
 

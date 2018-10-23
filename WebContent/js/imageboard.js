@@ -1,4 +1,19 @@
 $(document).ready(function(){
+	//돋보기 이벤트
+	$(document).on('click', '#plus', function(){
+		
+	});
+	$(document).on('mouseover', '#image1', function(e){
+		x = e.pageX;
+		y = e.pageY;
+		console.log(x + " " + y);
+	});
+	
+	
+	
+	
+	
+	
 	//이미지 글쓰기 버튼
 	var img_list_num = 3;
 	$('#img_write_btn').on('click', function(){
@@ -63,6 +78,7 @@ $(document).ready(function(){
 			///miniproject/board/boardList.do
 		});
 	});
+	
 	
 	
 });

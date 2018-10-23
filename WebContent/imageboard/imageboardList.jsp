@@ -31,7 +31,7 @@
 					<td class = "board">${imageboardDTO.seq}</td>
 				
 					<td class = "board">
-						<img src = "../upload/${imageboardDTO.image1}" width = "100" height = "100"/>
+						<img src = "../upload/${imageboardDTO.image1}" width = "100" height = "100" onclick = "location.href='/miniproject/imageboard/imageboardView.do?seq=${imageboardDTO.seq}'"/>
 					</td>
 					
 					<%-- <a href = "#" id = "view_aTag">${imageboardDTO.image1}</a></td> --%>

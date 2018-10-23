@@ -5,12 +5,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="imageboardSQL">
 
 	<insert id = "writeImageboard" parameterType = "imageboard">
-		insert into imageboard values(seq_imageboard.nextval,
-										#{imageId},
-										#{imageName},
-										#{imagePrice},
-										#{imageQty},
+		insert into imageboard values(seq_imageboard.nextval, 
+										#{imageId}, 
+										#{imageName}, 
+										#{imagePrice}, 
+										#{imageQty}, 
 										#{imageContent},
+										#{image1},  
 										sysdate)
 	</insert>
 	
@@ -27,6 +28,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id = "boardView" resultType = "imageboard">
 		select * from board where seq = #{seq}
+	</select>
+
+	<select id = "imageboardView" resultType = "imageboard">
+		select * from imageboard where seq = #{seq}
 	</select>
 	
 	

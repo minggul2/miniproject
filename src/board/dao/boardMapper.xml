@@ -24,6 +24,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			(select rownum rn, tt.* from
 				(select * from board order by ref desc, step asc) tt)
 			where rn <![CDATA[>=]]> #{startNum} and rn <![CDATA[<=]]> #{endNum}
+			<!-- where rn between #{startNum} and #{endNum} -->
 	</select>
 	
 	<select id = "getBoardTotalA" resultType = "int">
@@ -66,9 +67,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 									sysdate)
 	</insert>
 	
-	<update id = "boardReply_hit" parameterType = "int">
+	<update id = "boardReply_reply" parameterType = "int">
 		update board set reply = reply +1 where seq = #{seq}
 	</update>
+	<!-- 답글등록 여기까지 -->
+	
 	
 	<!-- 게시글삭제 -->
 	<update id = "boardDelete_reply" parameterType = "int">
@@ -82,6 +85,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id = "boardDelete_board" parameterType = "int">
 		delete board where seq = #{seq}
 	</delete>
+	<!-- 여기까지 -->
+	
 	
 	<!-- 게시글 수정 -->
 	<update id = "board_Modify" parameterType = "Map">

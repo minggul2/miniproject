@@ -15,7 +15,6 @@ public class BoardModifyAction implements CommandProcess {
 
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-		System.out.println(request.getParameter("seq") + "???");
 		int seq = Integer.parseInt(request.getParameter("seq"));
 		
 		String subject = request.getParameter("subject");

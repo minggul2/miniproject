@@ -74,7 +74,6 @@ public static BoardDAO instance;
 		totalA = sqlSession.selectOne("boardSQL.getBoardTotalA");
 		sqlSession.close();
 		return totalA;
-		
 	}
 	
 	public BoardDTO boardView(int seq) {
@@ -101,7 +100,6 @@ public static BoardDAO instance;
 		sqlSession.update("boardSQL.board_Modify", map);
 		sqlSession.commit();
 		sqlSession.close();
-		
 	}
 
 	public void boardReply(Map<String, String> map) {
@@ -113,11 +111,9 @@ public static BoardDAO instance;
 		pDTO.setEmail(map.get("email"));
 		pDTO.setSubject(map.get("subject"));
 		pDTO.setContent(map.get("content"));
-		/*pDTO.setLev(pDTO.getLev()+1);
-		pDTO.setStep(pDTO.getStep()+1);*/
 		pDTO.setPseq(pDTO.getSeq());
-		sqlSession.insert("boardSQL.boardReply_insert", pDTO);
-		sqlSession.update("boardSQL.boardReply_hit", pDTO.getSeq());
+		sqlSession.insert("boardreplySQL.boardReply_insert", pDTO);
+		sqlSession.update("boardSQL.boardReply_reply", pDTO.getSeq());
 		sqlSession.commit();
 		sqlSession.close();
 		
@@ -125,45 +121,21 @@ public static BoardDAO instance;
 
 	//삭제
 	public void boardDelete(int seq, int pseq) {
-		
-		/*String sql = "update board set reply = reply -1 where seq = (select pseq from board where seq = ?)";*/
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		sqlSession.update("boardSQL.boardDelete_reply", seq);
 		sqlSession.commit();
-/*			
-			String sql = "update board set reply = reply - 1 where seq = ?";
-			conn = ds.getConnection();
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, pseq);
-			pstmt.executeUpdate();
-*/
+
 		Map<String, String> map = new HashMap<>();
 		map.put("subject_add", "[원글이 삭제된 답글]");
 		map.put("pseq", seq+"");
 		sqlSession.update("boardSQL.boardDelete_subejct", map);
 		sqlSession.commit();
 		
-		
-/*			
-			sql = "update board set subject = ? || subject where pseq = ?";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, "[원글이 삭제된 답글]" );
-			pstmt.setInt(2, seq);
-			pstmt.executeUpdate();
-			*/
-		
 		sqlSession.delete("boardSQL.boardDelete_board", seq);
 		sqlSession.commit();
 		sqlSession.close();
 		
-/*			sql = "delete board where seq = ?";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, seq);
-			pstmt.executeUpdate();
-*/			
 	}
-	
-	
 }
 
 

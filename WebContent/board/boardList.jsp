@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
-    
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,7 +27,8 @@
 		<c:if test = "${list != 'null' || list ne null}">
 
 				<c:forEach var="boardDTO" items="${list}" varStatus = "i">
-						<tr>
+					<fmt:parseDate value='${boardDTO.logtime}' var='logtime' pattern='yyyy-MM-dd'/>
+					<tr>
 							<td class = "board">${boardDTO.seq}</td>
 				
 					<td class = "board">
@@ -40,7 +41,7 @@
 					</c:if>
 					<a href = "#" id = "view_aTag">${boardDTO.subject}</a></td>
 					<td class = "board">${boardDTO.id}</td>
-					<td class = "board">${boardDTO.logtime}</td>
+					<td class = "board"><fmt:formatDate value="${logtime}" pattern="yyyy.MM.dd"/></td>
 					<td class = "board">${boardDTO.hit}</td>
 										
 				</tr>
@@ -50,7 +51,9 @@
 	</table>
 	<br><br>
 	<input type = "button" value = "10개씩" class = "board_list_a"/>
-	<input type = "button" value = "5개씩" class = "board_list_a"/>
+	<input type = "button" value = "5개씩" class = "board_list_a"/><br>
+	
+	
 	
 </div>
 
@@ -58,6 +61,16 @@
 <!-- <img style = "float : center; cursor: pointer;" src = "../image/aa.png" onclick = "location.href = '../main/index.jsp'"> -->
 <div id = "paging_div"style = "float : center; border : 1px red solid; width : 600px; text-align : center;" align = "center">${boardPaging.pagingHTML}</div>
 </div>
+<form action = "/miniproject/board/boardSearch.do" method = "post" >
+	<div>
+		<select id = "search_select" name = "searchOption">
+			<option selected="selected">제목</option>
+			<option>아이디</option>
+		</select>
+		<input type = "text" name = "keyword" />
+		<input type = "submit" id = "search_btn" value = "검색" />
+	</div>
+</form>
 <!-- <script src = "http://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src ="../js/board.js"></script> -->
 	
