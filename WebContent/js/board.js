@@ -1,4 +1,9 @@
+
+
 $(document).ready(function(){
+	//뒤로가기처리
+	var back_page;
+	
 	
 	var list_num = 5;
 	var pg = 1;
@@ -24,6 +29,7 @@ $(document).ready(function(){
 		location.href = '/miniproject/board/boardView.do?seq='+seq+'&pg='+pg;	
 	});
 	
+	//글수정 이벤트
 	$('#view_div').on('click', '#board_modify_button', function(){
 		
 		var seq = $('#seq').val();
@@ -32,6 +38,7 @@ $(document).ready(function(){
 		location.href = 'boardModifyForm.do?seq='+seq+'&pg='+pg;
 	});
 	
+	//글삭제 이벤트
 	$('#delete_board').on('click', function(){
 		
 		location.href = "boardDelete.do?seq="+seq;
@@ -53,6 +60,9 @@ $(document).ready(function(){
 		10개씩보기 5개씩 보기 -> attr('value') 로 해결 (버튼 밸류값 첫글자 숫자따옴)
 		*/
 		
+		//뒤로가기
+		console.log(location.hash);
+		
 		var pg_move = parseInt($(this).attr('class'));
 
 		if(!isNaN(parseInt($(this).attr('value')))){	//누른것이 10목록, 5목록 일 경우
@@ -64,7 +74,10 @@ $(document).ready(function(){
 		}else if(pg_move){					//누른것이 [이전][다음] 일 경우
 			pg = parseInt($(this).attr('class'));
 		}
-		
+	/*	if(document.location.hash){	
+			var hash = document.location.hash.replace('#page', '');
+			pg = hash;
+		}*/
 		
 		$.ajax({
 			type :  "POST",
@@ -73,9 +86,21 @@ $(document).ready(function(){
 			dataType : "html",	//html, text, json
 			success : function(data){	//이 영역은 비동기 아래 코드가 끝나고 실행됨
 				$('#display').html(data);	//여기가 중요한데 <jsp:include page = "${display}"> 영역을 아예 갈아치워버림
+				document.location.hash = "#page" + pg;
+				back_page = pg;
 			}
 			///miniproject/board/boardList.do
 		});
+	});
+	
+	$(window).bind('hashchange', function(){
+		alert(location.hash);
+		if(location.hash == ""){
+			
+			pg = back_page;
+			$('#paging_div > a, .board_list_a').trigger('click');
+		}
+		
 	});
 	
 });
