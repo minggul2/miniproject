@@ -94,7 +94,7 @@ $(document).ready(function(){
 	$(document).on('click', '#paging_div > #search_paging, .search_board_list_a, #paging_div > #search_currentPage, #search_btn', function(){
 		
 		
-		
+		var index = 0;
 		var pg_move = parseInt($(this).attr('class'));
 		
 		if(!isNaN(parseInt($(this).attr('value')))){	//누른것이 10목록, 5목록 일 경우
@@ -103,12 +103,14 @@ $(document).ready(function(){
 			pg = 1;
 			searchOption = $('#select_option option:selected').val();
 			keyword = $('#keyword').val();
+			alert(index);
 		}else if(!isNaN($(this).html())){				//누른것이 [1][2][3] 일 경우
 			pg = $(this).html();		
 		}else if(pg_move){								//누른것이 [이전][다음] 일 경우
 			pg = parseInt($(this).attr('class'));
 		}
-		console.log('list_num : ' + list_num);
+		
+		index = $('#select_option option').index($('#select_option:selected'));
 		
 		$.ajax({
 			type :  "POST",
@@ -117,6 +119,8 @@ $(document).ready(function(){
 			dataType : "html",	//html, text, json
 			success : function(data){	//이 영역은 비동기 아래 코드가 끝나고 실행됨
 				$('#display').html(data);	//여기가 중요한데 <jsp:include page = "${display}"> 영역을 아예 갈아치워버림
+				$('#keyword').val(keyword);
+				$('#select_option option:eq('+index+')').attr('selected', 'selected');
 				document.location.hash = "#page" + pg;
 				console.log("pg : " + pg);
 				back_page = pg;

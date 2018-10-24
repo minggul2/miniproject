@@ -5,26 +5,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style>
-.image {
-  transform: scale(1);
-  -webkit-transform: scale(1);
-  -moz-transform: scale(1);
-  -ms-transform: scale(1);
-  -o-transform: scale(1);
-  transition: all 0.3s ease-in-out;
-}
-.image:hover {
-  transform: scale(1.3);
-  -webkit-transform: scale(1.3);
-  -moz-transform: scale(1.3);
-  -ms-transform: scale(1.3);
-  -o-transform: scale(1.3);
-}
-</style>
 
-<link rel="stylesheet" href="https://thdoan.github.io/magnify/css/magnify.css">
-
+<link rel="stylesheet" href="../css/jquery-picZoomer.css">
+	<script src = "http://code.jquery.com/jquery-3.3.1.min.js"> </script>
+	<script src = "../js/jquery.picZoomer.js"></script>
+	<script>
+		$(document).ajaxComplete(function(){
+			$('.picZoomer').picZoomer();
+			$('.picZoomer img').click(function(){
+				alert("");
+			});
+			alert("");
+		});
+	</script>
 </head>
 
 
@@ -33,7 +26,11 @@
 	<table border = "1">
 		<tr>
 			<td rowspan = "4">
-			<img src = "../upload/${imageboardDTO.image1}" width = "200" height = "200" id = "image1" class = "image" /></td>
+			<div class = "picZoomer">
+				<img alt = "" src = "../upload/${imageboardDTO.image1}" width = "320" height = "320"/>
+					<!-- id = "image1" class = "image" -->
+			</div>
+			</td>
 			<td>상품명${imageboardDTO.imageName}</td>
 		</tr>
 		
@@ -52,11 +49,6 @@
 	</table>
 	${imageboardDTO.seq}
 	
-	<script src = "http://code.jquery.com/jquery-3.3.1.min.js">
-	</script>
-	<script type="text/javascript" src="../js/cloud-zoom.1.0.2.min.js"></script>
-	<script src = "../js/imageboard.js">
-	</script>
 </body>
 </html>
 
